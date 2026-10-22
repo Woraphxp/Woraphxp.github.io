@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website | Menu & Login</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Tahoma, sans-serif;
+    }
+
+    body {
+      background: #f1f5f9;
+      color: #1e293b;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    nav {
+      background: #111827;
+      color: white;
+      padding: 18px 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #818cf8;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 10px 14px;
+      border-radius: 8px;
+    }
+
+    .nav-links button:hover,
+    .nav-links button.active {
+      background: #4f46e5;
+    }
+
+    /* Main content */
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      text-align: center;
+      padding: 55px 20px;
+      background: linear-gradient(135deg, #4f46e5, #818cf8);
+      color: white;
+      border-radius: 20px;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .primary-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      background: white;
+      color: #4338ca;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    /* Menu cards */
+    .section-title {
+      text-align: center;
+      margin: 25px 0;
+      font-size: 28px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit, minmax(220px, 1fr)
+      );
+      gap: 20px;
+    }
+
+    .menu-card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 5px 18px #0f172a0d;
+      transition: 0.2s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px #0f172a15;
+    }
+
+    .menu-card .icon {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .menu-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .menu-card p {
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    /* Login form */
+    .login-container {
+      max-width: 420px;
+      margin: 20px auto;
+      padding: 35px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 35px #0f172a12;
+    }
+
+    .login-container h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .login-description {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .form-group input:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px #6366f122;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 9px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-btn:hover {
+      background: #4338ca;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #64748b;
+    }
+
+    @media (max-width: 500px) {
+      nav {
+        padding: 16px;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+
+      main {
+        margin-top: 20px;
+        padding: 14px;
+      }
+
+      .login-container {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Menu -->
+  <nav>
+    <div class="logo">MY WEBSITE</div>
+
+    <div class="nav-links">
+      <button class="active" data-page="home"
+        onclick="showPage('home', this)">
+        Home
+      </button>
+
+      <button data-page="menu"
+        onclick="showPage('menu', this)">
+        Menu
+      </button>
+
+      <button data-page="login"
+        onclick="showPage('login', this)">
+        Login
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+      <div class="hero">
+        <h1>Welcome to My Website</h1>
+        <p>
+          ยินดีต้อนรับเข้าสู่เว็บไซต์ของเรา<br>
+          เริ่มต้นใช้งานได้ง่าย ๆ ในที่เดียว
+        </p>
+
+        <button class="primary-btn"
+          onclick="showPage('menu')">
+          Explore Menu
+        </button>
+      </div>
+
+      <h2 class="section-title">เว็บไซต์ของเรา</h2>
+
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="icon">🏠</div>
+          <h3>Home</h3>
+          <p>หน้าแรกสำหรับต้อนรับผู้เข้าชมเว็บไซต์</p>
+        </div>
+
+        <div class="menu-card">
+          <div class="icon">📋</div>
+          <h3>Menu</h3>
+          <p>รวมเมนูและบริการต่าง ๆ ของเว็บไซต์</p>
+        </div>
+
+        <div class="menu-card">
+          <div class="icon">🔐</div>
+          <h3>Login</h3>
+          <p>หน้าเข้าสู่ระบบสำหรับผู้ใช้งาน</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Page -->
+    <section id="menu" class="page">
+      <h1 class="section-title">Our Menu</h1>
+
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div class="icon">👤</div>
+          <h3>Profile</h3>
+          <p>ข้อมูลส่วนตัวและโปรไฟล์ผู้ใช้งาน</p>
+        </div>
+
+        <div class="menu-card">
+          <div class="icon">📊</div>
+          <h3>Dashboard</h3>
+          <p>ภาพรวมข้อมูลและสถิติการใช้งาน</p>
+        </div>
+
+        <div class="menu-card">
+          <div class="icon">⚙️</div>
+          <h3>Settings</h3>
+          <p>ตั้งค่าและปรับแต่งการใช้งานเว็บไซต์</p>
+        </div>
+
+        <div class="menu-card">
+          <div class="icon">📞</div>
+          <h3>Contact</h3>
+          <p>ช่องทางติดต่อและสอบถามข้อมูล</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Login Page -->
+    <section id="login" class="page">
+      <div class="login-container">
+        <h1>Login</h1>
+        <p class="login-description">
+          เข้าสู่ระบบบัญชีของคุณ
+        </p>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="กรอกชื่อผู้ใช้"
+              autocomplete="username"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="กรอกรหัสผ่าน"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+
+          <button type="submit" class="login-btn">
+            Login
+          </button>
+
+          <p id="message" class="message"
+            role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2026 My Website. All rights reserved.
+  </footer>
+
+  <script>
+    // เปลี่ยนหน้า Home, Menu และ Login
+    function showPage(pageId, button) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+
+      document.getElementById(pageId).classList.add('active');
+
+      document.querySelectorAll('.nav-links button')
+        .forEach(btn => btn.classList.remove('active'));
+
+      const activeButton = button ||
+        document.querySelector(
+          `.nav-links button[data-page="${pageId}"]`
+        );
+
+      if (activeButton) {
+        activeButton.classList.add('active');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ตัวอย่างการตรวจสอบแบบ Demo เท่านั้น
+    document.getElementById('loginForm')
+      .addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const username =
+          document.getElementById('username').value.trim();
+
+        const password =
+          document.getElementById('password').value;
+
+        const message = document.getElementById('message');
+
+        if (!username || !password) {
+          message.style.color = '#dc2626';
+          message.textContent =
+            'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน';
+          return;
+        }
+
+        message.style.color = '#b45309';
+        message.textContent =
+          'ตัวอย่างหน้า Login: ยังไม่ได้เชื่อมต่อระบบยืนยันตัวตน';
+      });
+  </script>
+
+</body>
+</html>
